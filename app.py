@@ -17,16 +17,11 @@ else:
 
 pipeline = ShapEPipeline.from_pretrained(repo).to(device)
 
-
-def build_prompt(kind):
-    return f"a 3D model of a {KIND[kind]}, single object, centered"
-
-
 def on_generate(kind):
     if not kind:
         return None, "동물을 선택해 주세요."
 
-    prompt = build_prompt(kind)
+    prompt =  f"a {KIND[kind]}"
 
     steps = 64 if device != "cpu" else 32
 
